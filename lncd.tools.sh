@@ -31,21 +31,22 @@ slicer_(){
  local f=$1
  local output=$(basename $f .nii.gz).png
  # second argument can be a prefix
- [ -z $2 ] && output=$2/$output
+ [ -n "$2" ] && output=$2/$output
 
  [ -z "$f" -o ! -r "$f" ] && warn "shots given bad input file" && return 1
  [ -r $output ] && return 0
  slicer $f -a >( convert - -background white label:$(basename $f .nii.gz) -gravity center -append $output) || return 1
+ sleep 1
 }
 
 #take screenshots of all nifti's given and make gif
 niis2gif(){
  out=$1; shift;
- [[ "$out"  =~ .gif$ || -z "$1" ]] && warn "bad input: $FUNC_NAME output.gif first.nii.gz [second.nii.gz ...]" && return 1
- tmpd=$(mktemp -d tmpXXXXX )
+ [[ ! "$out"  =~ .gif$ || -z "$1" ]] && warn "bad input: $FUNC_NAME output.gif first.nii.gz [second.nii.gz ...]" && return 1
+ tmpd=$(mktemp -d tmpXXXXX ) || return 1
  for nii in $@; do
    slicer_ $nii $tmpd/ || return 1
  done
  convert $tmpd/*png $out 
- rm $tmpd
+ [ -n "$tmpd" ] && rm -r $tmpd
 }
