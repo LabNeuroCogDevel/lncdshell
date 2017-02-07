@@ -42,7 +42,7 @@ slicer_(){
 niis2gif(){
  out=$1; shift;
  [[ "$out"  =~ .gif$ || -z "$1" ]] && warn "bad input: $FUNC_NAME output.gif first.nii.gz [second.nii.gz ...]" && return 1
- tmpd=$(mktemp -d)
+ tmpd=$(mktemp -d tmpXXXXX )
  for nii in $@; do
    slicer_ $nii $tmpd/ || return 1
  done
