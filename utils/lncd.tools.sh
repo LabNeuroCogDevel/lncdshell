@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
 
-# get "warn" function
-
-# source $(dirname ${BASH_SOURCE})/lncd.src.sh #BASH
-# source $(dirname $0)/lncd.src.sh #ZSH
-thisdir=""; [ -n "$BASH_SOURCE" ]  && this=${BASH_SOURCE}; [ -n "$ZSH_VERSION" ]  && this=$0; [ -z "$thisdir" ] && this=/opt/ni_tools/lncdshell/junk; thisdir=$(dirname $this)
-source $thisdir/lncd.src.sh
-
 ## dicom to nifti with dcmstack (embeded json metadata) + afni history for MR* files
 #usage:
 # MR2niigz /Volumes/Phillips/Raw/MRprojects/mMRDA-dev/2016.04.13-08.51.01/B0131/tfl_MT_128x96.11/  ~/test.nii.gz
