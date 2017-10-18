@@ -1,4 +1,6 @@
-useful shell (bash) functions
-
+useful shell (bash, zsh) functions
+```
 source lncd.src.sh
-source lncd.tools.sh
+```
+
+

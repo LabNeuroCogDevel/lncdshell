@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # 20170207WF - collect common convience functions
+# 20171018WF - default to source all files in this directory
 
 warn() {
  echo -e $@ >&2
@@ -29,3 +30,15 @@ afni_() {
  # launch afni with all images in directory with default MNI underlay and niml + plugouts set
  afni -yesplugouts -niml -com "SET_ANATOMY $anat" -dset $MNIT1 $(find . -maxdepth 1 -type f \( -iname '*HEAD' -or -iname '*.nii*' \))
 }
+
+
+### source all others
+
+# bash                       # zsh
+thisscript="${BASH_SOURCE}"; [ -z "$thisscript" ] && thisscript="${(%):-%x}"
+
+if [ -z "$thisscript" -o ! -r $thisscript ]; then 
+ warn "You are not running in bash or zsh. You should be!"
+else
+ for f in $(dirname $thisscript)/utils/*sh; do echo $f; . $f; done
+fi
