@@ -70,6 +70,6 @@ niis2gif(){
  for nii in $@; do
    slicer_ $nii $tmpd/ || return 1
  done
- convert $tmpd/*png $out 
+ convert -delay 350 $tmpd/*png $out 
  [ -n "$tmpd" ] && rm -r $tmpd
 }
