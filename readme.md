@@ -14,3 +14,6 @@ source lncd.src.sh
 ## Minor hacks
  * `afni_` - include mni template + working directory)
  * `niis2gif` - make a gif from a bunch of niis
+ * `warn` to echo to standard error
+ * `exiterr` 
+ * `traperr`  - `set -e; trap traperr EXIT`
